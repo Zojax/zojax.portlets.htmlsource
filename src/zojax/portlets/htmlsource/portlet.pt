@@ -1,0 +1,19 @@
+<div class="z-portlet portlet-htmlsource"
+     tal:define="cssClass string:z-portlet portlet-htmlsource"
+     tal:attributes="class python:context.cssClass and cssClass + ' ' + context.cssClass
+                                  or cssClass"
+     tal:condition="context/decoration">
+
+  <h2 class="z-portlet-header"
+      tal:condition="context/label" tal:content="context/label">Portlet Header</h2>
+
+  <div class="z-portlet-body">
+    <div class="z-portlet-item"
+         tal:condition="context/source"
+   tal:content="structure context/source/cooked"></div>
+  </div>
+
+</div>
+
+<tal:block condition="not:context/decoration"
+           content="structure context/source/cooked" />

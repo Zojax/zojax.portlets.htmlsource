@@ -1,0 +1,17 @@
+<configure
+   xmlns="http://namespaces.zope.org/zope"
+   xmlns:zojax="http://namespaces.zope.org/zojax"
+   i18n_domain="zojax.portlets">
+
+  <zojax:portlet
+     name="portlet.htmlsource"
+     title="HTML Source"
+     class=".portlet.HTMLSourcePortlet"
+     schema=".interfaces.IHTMLSourcePortlet" />
+
+  <zojax:pagelet
+     type="portlet.view"
+     template="portlet.pt"
+     for=".portlet.HTMLSourcePortlet"/>
+  
+</configure>

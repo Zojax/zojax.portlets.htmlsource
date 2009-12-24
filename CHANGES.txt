@@ -1,0 +1,36 @@
+=======
+CHANGES
+=======
+
+0.3.2 (2009-10-07)
+------------------
+
+- Update tests
+
+
+0.3.1 (2009-09-07)
+------------------
+
+- Fixed no decoration template
+
+
+0.3.0 (2009-08-12)
+------------------
+
+- Update test for chameleon enabled setup
+
+- Added custom class attribute
+
+- Copyright changed to 'Zope Foundation and Contributors'
+
+
+0.2.0 (2009-05-20)
+------------------
+
+- Do not use z3c.autoinclude
+
+
+0.1.0 (2009-03-19)
+------------------
+
+- Initial release

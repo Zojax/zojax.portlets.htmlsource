@@ -1,0 +1,85 @@
+===================
+HTML Source portlet
+===================
+
+    >>> from zope import component, interface
+    >>> from zope.testbrowser.testing import Browser
+    >>> from zojax.extensions.interfaces import IExtensible
+    >>> from zope.app.testing.functional import getRootFolder
+
+    >>> root = getRootFolder()
+    >>> interface.alsoProvides(root, IExtensible)
+
+
+change portlet settings
+
+    >>> actor = Browser()
+    >>> actor.handleErrors = False
+    >>> actor.addHeader("Authorization", "Basic mgr:mgrpw")
+    >>> actor.open("http://localhost/++extensions++/")
+    >>> actor.getLink('Portlets').click()
+
+set portlets manager
+
+    >>> actor.getLink('Left column portlets').click()
+    >>> actor.open('http://localhost/++extensions++/portlets/columns.left/?form.widgets.portletIds:list=portlet.htmlsource&form.buttons.save=Save&form.widgets.status=1')
+
+setup portlet
+
+    >>> actor.open('http://localhost/++extensions++/portlets/columns.left/')
+    >>> actor.getLink('HTML Source').click()
+    >>> actor.getControl('Label').value = u'Test html'
+    >>> actor.getControl('Source').value = '<div> test test </div>'
+    >>> actor.getControl(name="source_format:list").value = ["zope.source.html"]
+    >>> actor.getControl(name="form.buttons.save").click()
+
+check portlet
+
+    >>> user = Browser()
+    >>> user.handleErrors = False
+    >>> user.addHeader("Authorization", "Basic mgr:mgrpw")
+    >>> user.open("http://localhost/test.html")
+    >>> print user.contents
+    <html>
+    ...
+    ...<div class="z-portlet portlet-htmlsource">
+      <h2 class="z-portlet-header">Test html</h2>
+      <div class="z-portlet-body">
+        <div class="z-portlet-item"><div> test test </div></div>
+      </div>
+    </div>...
+    ...
+    </html>
+
+
+Custom css class
+
+    >>> actor.getControl('CSS class').value = 'custom'
+    >>> actor.getControl(name="form.buttons.save").click()
+
+    >>> user.open("http://localhost/test.html")
+    >>> print user.contents
+    <html>
+    ...
+    ...<div class="z-portlet portlet-htmlsource custom">
+      <h2 class="z-portlet-header">Test html</h2>
+      <div class="z-portlet-body">
+        <div class="z-portlet-item"><div> test test </div></div>
+      </div>
+    </div>...
+    ...
+    </html>
+
+
+No decoration
+
+    >>> actor.getControl(name="form.widgets.decoration:list").value = ['false']
+    >>> actor.getControl(name="form.buttons.save").click()
+
+    >>> user.open("http://localhost/test.html")
+    >>> print user.contents
+    <html>
+    ...
+    <td><div> test test </div></td>
+    ...
+    </html>
