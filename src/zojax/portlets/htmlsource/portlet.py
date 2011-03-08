@@ -20,5 +20,4 @@ from zojax.richtext.field import RichTextProperty
 
 
 class HTMLSourcePortlet(object):
-
-    source = RichTextProperty(IHTMLSourcePortlet['source'])
+    pass
