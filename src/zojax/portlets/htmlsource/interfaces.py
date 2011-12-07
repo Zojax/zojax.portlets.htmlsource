@@ -19,7 +19,7 @@ from zope import interface, schema
 from zope.i18n import MessageFactory
 from zojax.richtext.field import RichText
 
-_ = MessageFactory('zojax.portlets')
+_ = MessageFactory('zojax.portlets.htmlsource')
 
 
 class IHTMLSourcePortlet(interface.Interface):
